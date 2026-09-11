@@ -1,0 +1,194 @@
+/*
+  Paleta pensada para uso en campo, con luz solar directa y con guantes:
+  alto contraste, botones grandes, sin decoración que compita con los datos.
+
+  --azul-plano   #12283F  fondo de encabezados / navegación (azul "plano
+                           de construcción", referencia directa al oficio)
+  --papel        #F5F4F1  fondo general, como papel de obra
+  --tinta        #1C1C1A  texto principal
+  --linea        #D8D5CC  bordes y divisores
+  --alerta       #C4531D  prioridad inmediata / acciones destructivas
+  --confirma     #2F6B4F  estados "sin afectación" / confirmaciones
+*/
+
+:root {
+  --azul-plano: #12283f;
+  --papel: #f5f4f1;
+  --tinta: #1c1c1a;
+  --linea: #d8d5cc;
+  --alerta: #c4531d;
+  --confirma: #2f6b4f;
+  color-scheme: light;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--papel);
+  color: var(--tinta);
+  font-family: 'Iowan Old Style', 'Georgia', serif;
+}
+
+h1,
+h2,
+h3,
+label,
+button,
+input,
+select,
+textarea {
+  font-family: -apple-system, 'Segoe UI', Roboto, sans-serif;
+}
+
+.topbar {
+  background: var(--azul-plano);
+  color: #fff;
+  padding: 14px 18px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.topbar h1 {
+  font-size: 17px;
+  margin: 0;
+  font-weight: 600;
+}
+
+.topbar .subtitulo {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+main {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 18px 16px 80px;
+}
+
+.tarjeta {
+  background: #fff;
+  border: 1px solid var(--linea);
+  border-radius: 4px;
+  padding: 16px;
+  margin-bottom: 14px;
+}
+
+.campo {
+  margin-bottom: 14px;
+}
+
+.campo label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.campo input,
+.campo select,
+.campo textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid var(--linea);
+  border-radius: 3px;
+  font-size: 15px;
+  background: #fff;
+  color: var(--tinta);
+}
+
+.campo textarea {
+  min-height: 80px;
+  resize: vertical;
+}
+
+.fila {
+  display: flex;
+  gap: 10px;
+}
+
+.fila > * {
+  flex: 1;
+}
+
+button {
+  border: none;
+  border-radius: 3px;
+  padding: 12px 18px;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+button.primario {
+  background: var(--azul-plano);
+  color: #fff;
+  width: 100%;
+}
+
+button.secundario {
+  background: transparent;
+  border: 1px solid var(--azul-plano);
+  color: var(--azul-plano);
+}
+
+button.peligro {
+  background: transparent;
+  color: var(--alerta);
+  border: 1px solid var(--alerta);
+}
+
+.etiqueta-estado {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 10px;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.etiqueta-estado.abierta {
+  background: #fdecd8;
+  color: var(--alerta);
+}
+
+.etiqueta-estado.cerrada {
+  background: #dcece3;
+  color: var(--confirma);
+}
+
+.lista-visitas a {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.aviso-offline {
+  background: #fdecd8;
+  color: var(--alerta);
+  font-size: 13px;
+  padding: 8px 16px;
+  text-align: center;
+}
+
+.hallazgo-bloque {
+  border-left: 3px solid var(--azul-plano);
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+
+.foto-miniatura {
+  width: 100%;
+  border-radius: 3px;
+  margin-top: 8px;
+}
