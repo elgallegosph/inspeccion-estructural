@@ -71,6 +71,23 @@ export default function VisitDetail() {
     }
   }
 
+  // Descarga el PDF sin cambiar el estado de la visita — sirve tanto
+  // para una visita abierta (vista previa) como para volver a bajar el
+  // informe de una que ya está cerrada.
+  async function descargarPDF() {
+    setGenerando(true);
+    try {
+      const doc = await generarInformePDF(visita);
+      doc.save(`informe-${visita.edificacion}-${visita.fecha.slice(0, 10)}.pdf`);
+    } finally {
+      setGenerando(false);
+    }
+  }
+
+  async function reabrirVisita() {
+    await actualizarVisita(visitaId, { estado: 'abierta' });
+  }
+
   return (
     <main>
       <h2>{visita.edificacion}</h2>
@@ -111,10 +128,28 @@ export default function VisitDetail() {
 
       <StructureForm onAgregar={agregarEstructura} />
 
-      {visita.estado === 'abierta' && (
+      {visita.estado === 'abierta' ? (
         <button className="primario" onClick={cerrarYGenerarPDF} disabled={generando}>
           {generando ? 'Generando informe…' : 'Cerrar visita y descargar PDF'}
         </button>
+      ) : (
+        <div className="tarjeta">
+          <p style={{ marginTop: 0, fontSize: 13 }}>
+            Esta visita está cerrada. Puedes volver a descargar el informe o reabrirla para
+            seguir editando.
+          </p>
+          <button
+            className="secundario"
+            onClick={descargarPDF}
+            disabled={generando}
+            style={{ width: '100%', marginBottom: 8 }}
+          >
+            {generando ? 'Generando informe…' : 'Descargar PDF de nuevo'}
+          </button>
+          <button className="peligro" onClick={reabrirVisita} style={{ width: '100%' }}>
+            Reabrir visita para editar
+          </button>
+        </div>
       )}
     </main>
   );
